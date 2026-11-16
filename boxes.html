@@ -2,164 +2,89 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0b0e">
 <title>Vault Boxes</title>
+<script>document.documentElement.classList.add('js','loading')</script>
+<style>
+#preloader{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:radial-gradient(60% 50% at 50% 45%,#1a1508,#0a0b0e 70%);transition:opacity .6s ease,visibility .6s}
+.js #preloader{display:flex}
+#preloader.out{opacity:0;visibility:hidden}
+html.loading{overflow:hidden}
+.pl-in{display:grid;justify-items:center;gap:22px;padding:24px}
+.pl-logo{width:132px;height:132px;position:relative;animation:plf 2.4s ease-in-out infinite;filter:drop-shadow(0 0 28px rgba(240,183,62,.45))}
+.pl-logo svg{width:100%;height:100%;display:block}
+.pl-logo polygon:first-of-type{stroke-dasharray:560;stroke-dashoffset:560;animation:pld 1.6s .1s ease forwards}
+.pl-logo g{opacity:0;animation:plg .8s .7s ease forwards}
+.pl-word{font:800 30px 'Big Shoulders Display',Impact,sans-serif;letter-spacing:.42em;text-indent:.42em;text-transform:uppercase;color:#f2efe8}
+.pl-bar{width:min(260px,64vw);height:3px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden}
+.pl-bar i{display:block;height:100%;transform:scaleX(.05);transform-origin:left;background:linear-gradient(90deg,#b8801a,#ffd98a);box-shadow:0 0 12px rgba(240,183,62,.7)}
+.pl-msg{font:600 13px Manrope,system-ui,sans-serif;letter-spacing:.06em;color:#9094a0;text-align:center;max-width:320px;min-height:18px}
+#preloader.err .pl-bar{display:none}#preloader.err .pl-msg{color:#f2efe8}
+@keyframes plf{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-6px) scale(1.03)}}
+@keyframes pld{to{stroke-dashoffset:0}}
+@keyframes plg{to{opacity:1}}
+</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="icon" href="assets/vault-helmet.png">
+<link rel="icon" type="image/svg+xml" href="assets/dt-logo.svg">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/boxes.css">
+<link rel="stylesheet" href="css/fx.css">
+<script type="importmap">{"imports":{"three":"./js/lib/three.module.js","three/addons/":"./js/lib/addons/"}}</script>
+<script type="module" src="js/main.js"></script>
 </head>
 <body>
-<div class="pg"><header class="nav"><div class="wrap">
-<a class="brand" href="index.html"><img src="assets/vault-helmet.png" alt=""><b>Vault</b></a>
+<div id="preloader" role="status" aria-live="polite"><div class="pl-in"><div class="pl-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><linearGradient id="pg" gradientUnits="userSpaceOnUse" x1="20" y1="10" x2="180" y2="190"><stop offset="0" stop-color="#fff3cf"/><stop offset=".45" stop-color="#f0b73e"/><stop offset="1" stop-color="#b8801a"/></linearGradient></defs><polygon points="100,8 180,54 180,146 100,192 20,146 20,54" fill="none" stroke="url(#pg)" stroke-width="5" stroke-linejoin="round"/>
+<polygon points="100,21 169,61 169,139 100,179 31,139 31,61" fill="rgba(240,183,62,.07)" stroke="url(#pg)" stroke-opacity=".4" stroke-width="1.5" stroke-linejoin="round"/><g transform="translate(100 100) scale(.74) translate(-100 -100)" fill="url(#pg)">
+<path fill-rule="evenodd" d="M24 44 H70 C104 44 124 70 124 100 C124 130 104 156 70 156 H24 Z M46 66 V134 H68 C90 134 102 120 102 100 C102 80 90 66 68 66 Z"/>
+<path d="M96 44 H176 V66 H160 V156 H138 V66 H96 Z"/></g></svg></div><div class="pl-word">Vault</div><div class="pl-bar"><i></i></div><div class="pl-msg">Loading</div></div><noscript><p style="position:absolute;bottom:40px;width:100%;text-align:center;color:#9094a0">JavaScript is required to view this site.</p></noscript></div>
+<div class="pg"><div class="gl bgfx" data-gl="dust"></div><header class="nav"><div class="wrap">
+<a class="brand" href="index.html"><img src="assets/dt-logo.svg" alt=""><b>Vault</b></a>
 <nav class="links" aria-label="Main"><a href="index.html">Home</a><a href="boxes.html" class=on>Boxes</a><a href="live.html">Live<span class=ph>Phase 2</span></a><a href="battles.html">Battles<span class=ph>Phase 3</span></a><a href="wallet.html">My Wins</a></nav>
 <div class="navr"><a class="chip" href="admin.html"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg> Admin view</a><a class="bal" href="wallet.html"><span class="num">$1,284.50</span><span class="pl"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></a><span class="av">KM</span></div>
 </div></header><main class="wrap"><div class="sech" style="padding-top:48px"><div><h1 class="disp h1s">Choose your box</h1><p class="sub">Every box lists its full prize pool, odds and remaining stock before you pay.</p></div>
 <div style="display:flex;gap:12px;flex-wrap:wrap"><label class="search"><span class="sr">Search boxes</span><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.5-4.5"/></svg><input id="q" type="search" placeholder="Search boxes or prizes"></label><button class="chip" type="button">Price: high to low <svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></div></div>
 <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px"><button class="chip on" type="button">All boxes</button><button class="chip" type="button">Luxury</button><button class="chip" type="button">Cards and collectibles</button><button class="chip" type="button">Tech and gaming</button><button class="chip" type="button">Mixed</button><button class="chip" type="button">Under $10</button></div><div class="row"><section class="main"><div class="grid g4" style="grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr))"><a class="card bx" href="box.html"><span class="stock num">412 left</span><span class="hot">Hot</span>
-<div class="bxa" style="--gl:rgba(255,217,138,0.34)"><svg viewBox="0 0 120 120" aria-hidden="true"><defs>
-<linearGradient id="c20t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd98a"/><stop offset="1" stop-color="#b8801a"/></linearGradient>
-<linearGradient id="c20l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b8801a"/><stop offset="1" stop-color="#65460e"/></linearGradient>
-<linearGradient id="c20r" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#936614"/><stop offset="1" stop-color="#372607"/></linearGradient></defs>
-<polygon points="16,38 60,60 60,108 16,86" fill="url(#c20l)"/>
-<polygon points="104,38 60,60 60,108 104,86" fill="url(#c20r)"/>
-<polygon points="60,16 104,38 60,60 16,38" fill="url(#c20t)"/>
-<polygon points="60,24 90,39 60,54 30,39" fill="#000" opacity=".16"/>
-<polygon points="16,38 60,60 60,70 16,48" fill="#fff" opacity=".14"/>
-<polygon points="104,38 60,60 60,70 104,48" fill="#000" opacity=".18"/>
-<g transform="matrix(1 .5 0 1 16 38)"><g transform="translate(22 27) scale(.6) translate(-22 -34)"><path d="M22 22 L32 34 L22 50 L12 34Z" fill="#ffd98a" opacity=".95"/><path d="M12 34 H32" stroke="#65460e" stroke-width="1.2" opacity=".6"/></g></g>
-<g stroke="#fff" opacity=".3" stroke-width=".9"><path d="M60 60 V108"/><path d="M16 38 L60 60 L104 38" fill="none"/></g>
-<g transform="matrix(1 -.5 0 1 60 60)" fill="#fff" opacity=".08"><rect x="4" y="22" width="36" height="3"/><rect x="4" y="30" width="36" height="3"/><rect x="4" y="38" width="36" height="3"/></g>
-</svg></div>
+<div class="bxa gl" data-gl="crate" data-tint="gold" data-auto="0.5" data-zoom="1.18" style="--gl:rgba(255,217,138,0.34)"></div>
 <div><div class="bxn">Chrono Vault</div><div class="bxm" style="margin-top:6px"><span>Luxury watches</span><span class="num">Top prize $4,200</span></div></div>
 <div class="odds"><i style="flex:0.3;background:#f0b73e"></i><i style="flex:3.1;background:#b48cff"></i><i style="flex:14;background:#4da3ff"></i><i style="flex:82.6;background:#9aa3b2"></i></div>
 <div class="bxm"><span class="pr num">$50.00</span><span class="btn gold sm">Open box</span></div></a><a class="card bx" href="box.html"><span class="stock num">1,280 left</span>
-<div class="bxa" style="--gl:rgba(205,178,255,0.34)"><svg viewBox="0 0 120 120" aria-hidden="true"><defs>
-<linearGradient id="c21t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#cdb2ff"/><stop offset="1" stop-color="#6a3fc0"/></linearGradient>
-<linearGradient id="c21l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6a3fc0"/><stop offset="1" stop-color="#3a2269"/></linearGradient>
-<linearGradient id="c21r" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#543299"/><stop offset="1" stop-color="#1f1239"/></linearGradient></defs>
-<polygon points="16,38 60,60 60,108 16,86" fill="url(#c21l)"/>
-<polygon points="104,38 60,60 60,108 104,86" fill="url(#c21r)"/>
-<polygon points="60,16 104,38 60,60 16,38" fill="url(#c21t)"/>
-<polygon points="60,24 90,39 60,54 30,39" fill="#000" opacity=".16"/>
-<polygon points="16,38 60,60 60,70 16,48" fill="#fff" opacity=".14"/>
-<polygon points="104,38 60,60 60,70 104,48" fill="#000" opacity=".18"/>
-<g transform="matrix(1 .5 0 1 16 38)"><g transform="translate(22 27) scale(.6) translate(-22 -34)"><path d="M22 20 L25.5 30 L36 30 L27.5 36 L31 46 L22 40 L13 46 L16.5 36 L8 30 L18.5 30Z" fill="#cdb2ff"/></g></g>
-<g stroke="#fff" opacity=".3" stroke-width=".9"><path d="M60 60 V108"/><path d="M16 38 L60 60 L104 38" fill="none"/></g>
-<g transform="matrix(1 -.5 0 1 60 60)" fill="#fff" opacity=".08"><rect x="4" y="22" width="36" height="3"/><rect x="4" y="30" width="36" height="3"/><rect x="4" y="38" width="36" height="3"/></g>
-</svg></div>
+<div class="bxa gl" data-gl="crate" data-tint="violet" data-auto="0.5" data-zoom="1.18" style="--gl:rgba(205,178,255,0.34)"></div>
 <div><div class="bxn">Slab Rush</div><div class="bxm" style="margin-top:6px"><span>Graded cards</span><span class="num">Top prize $640</span></div></div>
 <div class="odds"><i style="flex:0.4;background:#f0b73e"></i><i style="flex:4;background:#b48cff"></i><i style="flex:21;background:#4da3ff"></i><i style="flex:74.6;background:#9aa3b2"></i></div>
 <div class="bxm"><span class="pr num">$25.00</span><span class="btn gold sm">Open box</span></div></a><a class="card bx" href="box.html"><span class="stock num">2,210 left</span>
-<div class="bxa" style="--gl:rgba(126,240,218,0.34)"><svg viewBox="0 0 120 120" aria-hidden="true"><defs>
-<linearGradient id="c22t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7ef0da"/><stop offset="1" stop-color="#0f8b7a"/></linearGradient>
-<linearGradient id="c22l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f8b7a"/><stop offset="1" stop-color="#084c43"/></linearGradient>
-<linearGradient id="c22r" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c6f61"/><stop offset="1" stop-color="#042924"/></linearGradient></defs>
-<polygon points="16,38 60,60 60,108 16,86" fill="url(#c22l)"/>
-<polygon points="104,38 60,60 60,108 104,86" fill="url(#c22r)"/>
-<polygon points="60,16 104,38 60,60 16,38" fill="url(#c22t)"/>
-<polygon points="60,24 90,39 60,54 30,39" fill="#000" opacity=".16"/>
-<polygon points="16,38 60,60 60,70 16,48" fill="#fff" opacity=".14"/>
-<polygon points="104,38 60,60 60,70 104,48" fill="#000" opacity=".18"/>
-<g transform="matrix(1 .5 0 1 16 38)"><g transform="translate(22 27) scale(.6) translate(-22 -34)"><path d="M25 18 L14 36 H22 L19 52 L31 32 H23Z" fill="#7ef0da"/></g></g>
-<g stroke="#fff" opacity=".3" stroke-width=".9"><path d="M60 60 V108"/><path d="M16 38 L60 60 L104 38" fill="none"/></g>
-<g transform="matrix(1 -.5 0 1 60 60)" fill="#fff" opacity=".08"><rect x="4" y="22" width="36" height="3"/><rect x="4" y="30" width="36" height="3"/><rect x="4" y="38" width="36" height="3"/></g>
-</svg></div>
+<div class="bxa gl" data-gl="crate" data-tint="teal" data-auto="0.5" data-zoom="1.18" style="--gl:rgba(126,240,218,0.34)"></div>
 <div><div class="bxn">Tech Drop</div><div class="bxm" style="margin-top:6px"><span>Consoles and audio</span><span class="num">Top prize $420</span></div></div>
 <div class="odds"><i style="flex:2;background:#b48cff"></i><i style="flex:18;background:#4da3ff"></i><i style="flex:80;background:#9aa3b2"></i></div>
 <div class="bxm"><span class="pr num">$15.00</span><span class="btn gold sm">Open box</span></div></a><a class="card bx" href="box.html"><span class="stock num">188 left</span>
-<div class="bxa" style="--gl:rgba(140,203,255,0.34)"><svg viewBox="0 0 120 120" aria-hidden="true"><defs>
-<linearGradient id="c23t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8ccbff"/><stop offset="1" stop-color="#1f5fbf"/></linearGradient>
-<linearGradient id="c23l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1f5fbf"/><stop offset="1" stop-color="#113469"/></linearGradient>
-<linearGradient id="c23r" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#184c98"/><stop offset="1" stop-color="#091c39"/></linearGradient></defs>
-<polygon points="16,38 60,60 60,108 16,86" fill="url(#c23l)"/>
-<polygon points="104,38 60,60 60,108 104,86" fill="url(#c23r)"/>
-<polygon points="60,16 104,38 60,60 16,38" fill="url(#c23t)"/>
-<polygon points="60,24 90,39 60,54 30,39" fill="#000" opacity=".16"/>
-<polygon points="16,38 60,60 60,70 16,48" fill="#fff" opacity=".14"/>
-<polygon points="104,38 60,60 60,70 104,48" fill="#000" opacity=".18"/>
-<g transform="matrix(1 .5 0 1 16 38)"><g transform="translate(22 27) scale(.6) translate(-22 -34)"><circle cx="22" cy="34" r="11" fill="none" stroke="#8ccbff" stroke-width="4"/><circle cx="22" cy="34" r="3" fill="#8ccbff"/></g></g>
-<g stroke="#fff" opacity=".3" stroke-width=".9"><path d="M60 60 V108"/><path d="M16 38 L60 60 L104 38" fill="none"/></g>
-<g transform="matrix(1 -.5 0 1 60 60)" fill="#fff" opacity=".08"><rect x="4" y="22" width="36" height="3"/><rect x="4" y="30" width="36" height="3"/><rect x="4" y="38" width="36" height="3"/></g>
-</svg></div>
+<div class="bxa gl" data-gl="crate" data-tint="blue" data-auto="0.5" data-zoom="1.18" style="--gl:rgba(140,203,255,0.34)"></div>
 <div><div class="bxn">Gold Standard</div><div class="bxm" style="margin-top:6px"><span>Jewelry and diamonds</span><span class="num">Top prize $2,600</span></div></div>
 <div class="odds"><i style="flex:0.6;background:#f0b73e"></i><i style="flex:5;background:#b48cff"></i><i style="flex:19;background:#4da3ff"></i><i style="flex:75.4;background:#9aa3b2"></i></div>
 <div class="bxm"><span class="pr num">$100.00</span><span class="btn gold sm">Open box</span></div></a><a class="card bx" href="box.html"><span class="stock num">6,450 left</span>
-<div class="bxa" style="--gl:rgba(207,214,226,0.34)"><svg viewBox="0 0 120 120" aria-hidden="true"><defs>
-<linearGradient id="c24t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#cfd6e2"/><stop offset="1" stop-color="#4b5565"/></linearGradient>
-<linearGradient id="c24l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4b5565"/><stop offset="1" stop-color="#292e37"/></linearGradient>
-<linearGradient id="c24r" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3c4450"/><stop offset="1" stop-color="#16191e"/></linearGradient></defs>
-<polygon points="16,38 60,60 60,108 16,86" fill="url(#c24l)"/>
-<polygon points="104,38 60,60 60,108 104,86" fill="url(#c24r)"/>
-<polygon points="60,16 104,38 60,60 16,38" fill="url(#c24t)"/>
-<polygon points="60,24 90,39 60,54 30,39" fill="#000" opacity=".16"/>
-<polygon points="16,38 60,60 60,70 16,48" fill="#fff" opacity=".14"/>
-<polygon points="104,38 60,60 60,70 104,48" fill="#000" opacity=".18"/>
-<g transform="matrix(1 .5 0 1 16 38)"><g transform="translate(22 27) scale(.6) translate(-22 -34)"><path d="M22 20 L25.5 30 L36 30 L27.5 36 L31 46 L22 40 L13 46 L16.5 36 L8 30 L18.5 30Z" fill="#cfd6e2"/></g></g>
-<g stroke="#fff" opacity=".3" stroke-width=".9"><path d="M60 60 V108"/><path d="M16 38 L60 60 L104 38" fill="none"/></g>
-<g transform="matrix(1 -.5 0 1 60 60)" fill="#fff" opacity=".08"><rect x="4" y="22" width="36" height="3"/><rect x="4" y="30" width="36" height="3"/><rect x="4" y="38" width="36" height="3"/></g>
-</svg></div>
+<div class="bxa gl" data-gl="crate" data-tint="steel" data-auto="0.5" data-zoom="1.18" style="--gl:rgba(207,214,226,0.34)"></div>
 <div><div class="bxn">Starter Crate</div><div class="bxm" style="margin-top:6px"><span>Everyday finds</span><span class="num">Top prize $60</span></div></div>
 <div class="odds"><i style="flex:6;background:#4da3ff"></i><i style="flex:94;background:#9aa3b2"></i></div>
 <div class="bxm"><span class="pr num">$5.00</span><span class="btn gold sm">Open box</span></div></a><a class="card bx" href="box.html"><span class="stock num">36 left</span><span class="hot">Hot</span>
-<div class="bxa" style="--gl:rgba(255,138,144,0.34)"><svg viewBox="0 0 120 120" aria-hidden="true"><defs>
-<linearGradient id="c25t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8a90"/><stop offset="1" stop-color="#a3202a"/></linearGradient>
-<linearGradient id="c25l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a3202a"/><stop offset="1" stop-color="#591117"/></linearGradient>
-<linearGradient id="c25r" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#821921"/><stop offset="1" stop-color="#30090c"/></linearGradient></defs>
-<polygon points="16,38 60,60 60,108 16,86" fill="url(#c25l)"/>
-<polygon points="104,38 60,60 60,108 104,86" fill="url(#c25r)"/>
-<polygon points="60,16 104,38 60,60 16,38" fill="url(#c25t)"/>
-<polygon points="60,24 90,39 60,54 30,39" fill="#000" opacity=".16"/>
-<polygon points="16,38 60,60 60,70 16,48" fill="#fff" opacity=".14"/>
-<polygon points="104,38 60,60 60,70 104,48" fill="#000" opacity=".18"/>
-<g transform="matrix(1 .5 0 1 16 38)"><g transform="translate(22 27) scale(.6) translate(-22 -34)"><path d="M25 18 L14 36 H22 L19 52 L31 32 H23Z" fill="#ff8a90"/></g></g>
-<g stroke="#fff" opacity=".3" stroke-width=".9"><path d="M60 60 V108"/><path d="M16 38 L60 60 L104 38" fill="none"/></g>
-<g transform="matrix(1 -.5 0 1 60 60)" fill="#fff" opacity=".08"><rect x="4" y="22" width="36" height="3"/><rect x="4" y="30" width="36" height="3"/><rect x="4" y="38" width="36" height="3"/></g>
-</svg></div>
+<div class="bxa gl" data-gl="crate" data-tint="crim" data-auto="0.5" data-zoom="1.18" style="--gl:rgba(255,138,144,0.34)"></div>
 <div><div class="bxn">Hypercar Hunt</div><div class="bxm" style="margin-top:6px"><span>Cars and exotics</span><span class="num">Top prize $128,000</span></div></div>
 <div class="odds"><i style="flex:0.02;background:#ff6b35"></i><i style="flex:1.2;background:#f0b73e"></i><i style="flex:8;background:#b48cff"></i><i style="flex:90.78;background:#9aa3b2"></i></div>
 <div class="bxm"><span class="pr num">$250.00</span><span class="btn gold sm">Open box</span></div></a><a class="card bx" href="box.html"><span class="stock num">903 left</span>
-<div class="bxa" style="--gl:rgba(255,154,107,0.34)"><svg viewBox="0 0 120 120" aria-hidden="true"><defs>
-<linearGradient id="c26t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff9a6b"/><stop offset="1" stop-color="#b3401a"/></linearGradient>
-<linearGradient id="c26l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b3401a"/><stop offset="1" stop-color="#62230e"/></linearGradient>
-<linearGradient id="c26r" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8f3314"/><stop offset="1" stop-color="#351307"/></linearGradient></defs>
-<polygon points="16,38 60,60 60,108 16,86" fill="url(#c26l)"/>
-<polygon points="104,38 60,60 60,108 104,86" fill="url(#c26r)"/>
-<polygon points="60,16 104,38 60,60 16,38" fill="url(#c26t)"/>
-<polygon points="60,24 90,39 60,54 30,39" fill="#000" opacity=".16"/>
-<polygon points="16,38 60,60 60,70 16,48" fill="#fff" opacity=".14"/>
-<polygon points="104,38 60,60 60,70 104,48" fill="#000" opacity=".18"/>
-<g transform="matrix(1 .5 0 1 16 38)"><g transform="translate(22 27) scale(.6) translate(-22 -34)"><path d="M22 22 L32 34 L22 50 L12 34Z" fill="#ff9a6b" opacity=".95"/><path d="M12 34 H32" stroke="#62230e" stroke-width="1.2" opacity=".6"/></g></g>
-<g stroke="#fff" opacity=".3" stroke-width=".9"><path d="M60 60 V108"/><path d="M16 38 L60 60 L104 38" fill="none"/></g>
-<g transform="matrix(1 -.5 0 1 60 60)" fill="#fff" opacity=".08"><rect x="4" y="22" width="36" height="3"/><rect x="4" y="30" width="36" height="3"/><rect x="4" y="38" width="36" height="3"/></g>
-</svg></div>
+<div class="bxa gl" data-gl="crate" data-tint="ember" data-auto="0.5" data-zoom="1.18" style="--gl:rgba(255,154,107,0.34)"></div>
 <div><div class="bxn">Ember Mix</div><div class="bxm" style="margin-top:6px"><span>Mixed prize pool</span><span class="num">Top prize $1,350</span></div></div>
 <div class="odds"><i style="flex:0.3;background:#f0b73e"></i><i style="flex:3.5;background:#b48cff"></i><i style="flex:16;background:#4da3ff"></i><i style="flex:80.2;background:#9aa3b2"></i></div>
 <div class="bxm"><span class="pr num">$35.00</span><span class="btn gold sm">Open box</span></div></a><a class="card bx" href="box.html"><span class="stock num">1,544 left</span>
-<div class="bxa" style="--gl:rgba(140,203,255,0.34)"><svg viewBox="0 0 120 120" aria-hidden="true"><defs>
-<linearGradient id="c27t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8ccbff"/><stop offset="1" stop-color="#1f5fbf"/></linearGradient>
-<linearGradient id="c27l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1f5fbf"/><stop offset="1" stop-color="#113469"/></linearGradient>
-<linearGradient id="c27r" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#184c98"/><stop offset="1" stop-color="#091c39"/></linearGradient></defs>
-<polygon points="16,38 60,60 60,108 16,86" fill="url(#c27l)"/>
-<polygon points="104,38 60,60 60,108 104,86" fill="url(#c27r)"/>
-<polygon points="60,16 104,38 60,60 16,38" fill="url(#c27t)"/>
-<polygon points="60,24 90,39 60,54 30,39" fill="#000" opacity=".16"/>
-<polygon points="16,38 60,60 60,70 16,48" fill="#fff" opacity=".14"/>
-<polygon points="104,38 60,60 60,70 104,48" fill="#000" opacity=".18"/>
-<g transform="matrix(1 .5 0 1 16 38)"><g transform="translate(22 27) scale(.6) translate(-22 -34)"><path d="M22 20 L25.5 30 L36 30 L27.5 36 L31 46 L22 40 L13 46 L16.5 36 L8 30 L18.5 30Z" fill="#8ccbff"/></g></g>
-<g stroke="#fff" opacity=".3" stroke-width=".9"><path d="M60 60 V108"/><path d="M16 38 L60 60 L104 38" fill="none"/></g>
-<g transform="matrix(1 -.5 0 1 60 60)" fill="#fff" opacity=".08"><rect x="4" y="22" width="36" height="3"/><rect x="4" y="30" width="36" height="3"/><rect x="4" y="38" width="36" height="3"/></g>
-</svg></div>
+<div class="bxa gl" data-gl="crate" data-tint="blue" data-auto="0.5" data-zoom="1.18" style="--gl:rgba(140,203,255,0.34)"></div>
 <div><div class="bxn">Mint Packs</div><div class="bxm" style="margin-top:6px"><span>Sealed booster packs</span><span class="num">Top prize $310</span></div></div>
 <div class="odds"><i style="flex:2.4;background:#b48cff"></i><i style="flex:24;background:#4da3ff"></i><i style="flex:73.6;background:#9aa3b2"></i></div>
-<div class="bxm"><span class="pr num">$20.00</span><span class="btn gold sm">Open box</span></div></a></div></section><aside class="side"><div class="card wins"><h3 class="disp">Latest big wins</h3><div class="w"><span class="mini"><svg viewBox="0 0 120 120" aria-hidden="true"><defs><linearGradient id="a28g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd98a"/><stop offset="1" stop-color="#b8801a"/></linearGradient><linearGradient id="a28h" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5ef2ff"/><stop offset=".5" stop-color="#ff7ad9"/><stop offset="1" stop-color="#ffd86b"/></linearGradient><radialGradient id="a28f" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#27303f"/><stop offset="1" stop-color="#0a0d13"/></radialGradient></defs><rect x="46" y="2" width="28" height="34" rx="7" fill="url(#a28g)" opacity=".7"/><rect x="46" y="84" width="28" height="34" rx="7" fill="url(#a28g)" opacity=".7"/><rect x="95" y="55" width="8" height="10" rx="2" fill="url(#a28g)"/><circle cx="60" cy="60" r="38" fill="url(#a28g)"/><circle cx="60" cy="60" r="32" fill="url(#a28f)"/><circle cx="60" cy="60" r="32" fill="none" stroke="#fff" stroke-opacity=".18"/><path d="M60 31v5M60 84v5M31 60h5M84 60h5M39.5 39.5l3 3M80.5 39.5l-3 3M39.5 80.5l3-3M80.5 80.5l-3-3" stroke="#ffd98a" stroke-width="2" stroke-linecap="round"/><path d="M60 60V40" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/><path d="M60 60L76 68" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><path d="M60 60L48 74" stroke="#ffd98a" stroke-width="1.4" stroke-linecap="round"/><circle cx="60" cy="60" r="3.4" fill="url(#a28g)"/><path d="M30 34 A38 38 0 0 1 56 22" stroke="#fff" stroke-opacity=".5" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg></span><span><b>Gold Chrono Diver</b><small>kx***9 &middot; just now</small></span><span class="v num">$4,200</span></div><div class="w"><span class="mini"><svg viewBox="0 0 120 120" aria-hidden="true"><defs><linearGradient id="a29g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8ccbff"/><stop offset="1" stop-color="#1f5fbf"/></linearGradient><linearGradient id="a29h" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5ef2ff"/><stop offset=".5" stop-color="#ff7ad9"/><stop offset="1" stop-color="#ffd86b"/></linearGradient><radialGradient id="a29f" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#27303f"/><stop offset="1" stop-color="#0a0d13"/></radialGradient></defs><polygon points="38,26 82,26 104,50 16,50" fill="url(#a29g)"/><polygon points="16,50 104,50 60,106" fill="url(#a29g)" opacity=".85"/><g fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="1.4" stroke-linejoin="round"><path d="M38 26 L48 50 L60 26 L72 50 L82 26"/><path d="M48 50 L60 106 L72 50"/><path d="M16 50 L60 106 L104 50"/></g><polygon points="38,26 60,26 48,50" fill="#fff" opacity=".35"/><polygon points="60,26 82,26 72,50" fill="#fff" opacity=".12"/></svg></span><span><b>Aurora Solitaire Pendant</b><small>z***ne &middot; just now</small></span><span class="v num">$2,600</span></div><div class="w"><span class="mini"><svg viewBox="0 0 120 120" aria-hidden="true"><defs><linearGradient id="a30g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#cfd6e2"/><stop offset="1" stop-color="#4b5565"/></linearGradient><linearGradient id="a30h" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5ef2ff"/><stop offset=".5" stop-color="#ff7ad9"/><stop offset="1" stop-color="#ffd86b"/></linearGradient><radialGradient id="a30f" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#27303f"/><stop offset="1" stop-color="#0a0d13"/></radialGradient></defs><rect x="46" y="2" width="28" height="34" rx="7" fill="url(#a30g)" opacity=".7"/><rect x="46" y="84" width="28" height="34" rx="7" fill="url(#a30g)" opacity=".7"/><rect x="95" y="55" width="8" height="10" rx="2" fill="url(#a30g)"/><circle cx="60" cy="60" r="38" fill="url(#a30g)"/><circle cx="60" cy="60" r="32" fill="url(#a30f)"/><circle cx="60" cy="60" r="32" fill="none" stroke="#fff" stroke-opacity=".18"/><path d="M60 31v5M60 84v5M31 60h5M84 60h5M39.5 39.5l3 3M80.5 39.5l-3 3M39.5 80.5l3-3M80.5 80.5l-3-3" stroke="#cfd6e2" stroke-width="2" stroke-linecap="round"/><path d="M60 60V40" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/><path d="M60 60L76 68" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><path d="M60 60L48 74" stroke="#cfd6e2" stroke-width="1.4" stroke-linecap="round"/><circle cx="60" cy="60" r="3.4" fill="url(#a30g)"/><path d="M30 34 A38 38 0 0 1 56 22" stroke="#fff" stroke-opacity=".5" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg></span><span><b>Steel Sport Chronograph</b><small>a***22 &middot; just now</small></span><span class="v num">$1,350</span></div><div class="w"><span class="mini"><svg viewBox="0 0 120 120" aria-hidden="true"><defs><linearGradient id="a31g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#cdb2ff"/><stop offset="1" stop-color="#6a3fc0"/></linearGradient><linearGradient id="a31h" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5ef2ff"/><stop offset=".5" stop-color="#ff7ad9"/><stop offset="1" stop-color="#ffd86b"/></linearGradient><radialGradient id="a31f" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#27303f"/><stop offset="1" stop-color="#0a0d13"/></radialGradient></defs><rect x="24" y="6" width="72" height="108" rx="8" fill="url(#a31g)"/><rect x="31" y="13" width="58" height="94" rx="4" fill="#10131a"/><rect x="35" y="19" width="50" height="52" rx="3" fill="url(#a31h)" opacity=".85"/><path d="M60 28 L65 43 L81 43 L68 52 L73 66 L60 57 L47 66 L52 52 L39 43 L55 43Z" fill="#fff" opacity=".85"/><rect x="35" y="79" width="36" height="5" rx="2" fill="#cdb2ff"/><rect x="35" y="89" width="50" height="3" rx="1.5" fill="#fff" opacity=".35"/><rect x="35" y="95" width="40" height="3" rx="1.5" fill="#fff" opacity=".25"/><path d="M24 70 L60 6 H80 L24 100Z" fill="#fff" opacity=".1"/></svg></span><span><b>Holo Wyrm Graded Slab</b><small>t***ry &middot; just now</small></span><span class="v num">$640</span></div><div class="w"><span class="mini"><svg viewBox="0 0 120 120" aria-hidden="true"><defs><linearGradient id="a32g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#cdb2ff"/><stop offset="1" stop-color="#6a3fc0"/></linearGradient><linearGradient id="a32h" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5ef2ff"/><stop offset=".5" stop-color="#ff7ad9"/><stop offset="1" stop-color="#ffd86b"/></linearGradient><radialGradient id="a32f" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#27303f"/><stop offset="1" stop-color="#0a0d13"/></radialGradient></defs><path d="M26 74 C22 24 98 24 94 74" fill="none" stroke="url(#a32g)" stroke-width="8" stroke-linecap="round"/><rect x="14" y="62" width="26" height="42" rx="11" fill="url(#a32g)"/><rect x="80" y="62" width="26" height="42" rx="11" fill="url(#a32g)"/><rect x="22" y="70" width="12" height="26" rx="6" fill="#0a0d13" opacity=".6"/><rect x="86" y="70" width="12" height="26" rx="6" fill="#0a0d13" opacity=".6"/><path d="M36 38 C48 28 70 28 84 38" stroke="#fff" stroke-opacity=".4" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span><span><b>Studio Pro Headphones</b><small>ol***1 &middot; just now</small></span><span class="v num">$420</span></div></div>
+<div class="bxm"><span class="pr num">$20.00</span><span class="btn gold sm">Open box</span></div></a></div></section><aside class="side"><div class="card wins"><h3 class="disp">Latest big wins</h3><div class="w"><span class="mini"><span class="gl glinl" data-gl="item" data-item="chrono"></span></span><span><b>Gold Chrono Diver</b><small>kx***9 &middot; just now</small></span><span class="v num">$4,200</span></div><div class="w"><span class="mini"><span class="gl glinl" data-gl="item" data-item="aurora"></span></span><span><b>Aurora Solitaire Pendant</b><small>z***ne &middot; just now</small></span><span class="v num">$2,600</span></div><div class="w"><span class="mini"><span class="gl glinl" data-gl="item" data-item="steel"></span></span><span><b>Steel Sport Chronograph</b><small>a***22 &middot; just now</small></span><span class="v num">$1,350</span></div><div class="w"><span class="mini"><span class="gl glinl" data-gl="item" data-item="slab"></span></span><span><b>Holo Wyrm Graded Slab</b><small>t***ry &middot; just now</small></span><span class="v num">$640</span></div><div class="w"><span class="mini"><span class="gl glinl" data-gl="item" data-item="phones"></span></span><span><b>Studio Pro Headphones</b><small>ol***1 &middot; just now</small></span><span class="v num">$420</span></div></div>
 <div class="card promo"><h3 class="disp">Verify any result</h3><p>Open a box, then check its ticket number and seed hash in your history. Nothing is hidden.</p><a class="btn ghost sm" href="box.html"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5L15.5 10"/></svg> How it works</a></div></aside></div></main><footer class="foot"><div class="wrap">
-<div><a class="brand" href="index.html"><img src="assets/vault-helmet.png" alt=""><b>Vault</b></a><p>Mystery boxes with real prizes. Odds are shown before every open, and every result is generated on the server and logged for audit.</p></div>
+<div><a class="brand" href="index.html"><img src="assets/dt-logo.svg" alt=""><b>Vault</b></a><p>Mystery boxes with real prizes. Odds are shown before every open, and every result is generated on the server and logged for audit.</p></div>
 <div><h4>Play</h4><ul><li><a href="boxes.html">Boxes</a></li><li><a href="live.html">Live streams</a></li><li><a href="battles.html">Draw battles</a></li><li><a href="wallet.html">My wins</a></li></ul></div>
 <div><h4>Trust</h4><ul><li><a href="box.html">How odds work</a></li><li><a href="wallet.html">Verification</a></li><li><a href="index.html">Terms</a></li><li><a href="index.html">Privacy</a></li></ul></div>
 <div style="display:flex;gap:14px;align-items:flex-start;max-width:340px"><span class="age">18+</span><p style="margin:0">Adults only. Withdrawals need identity verification. Availability depends on your region's laws. Play within your limits.</p></div>
-</div></footer></div>
+</div></footer><nav class="tabbar" aria-label="Primary"><a href="index.html"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 4v10l-8 4-8-4V7z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg><span>Home</span></a><a href="boxes.html" class=on><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9" r="1.2"/><circle cx="15" cy="15" r="1.2"/><circle cx="12" cy="12" r="1.2"/></svg><span>Boxes</span></a><a href="live.html"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3z"/></svg><span>Live</span></a><a href="battles.html"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4l9 9M20 4l-9 9M4 20l4-4M20 20l-4-4M13 13l-2 2"/></svg><span>Battles</span></a><a href="wallet.html"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10h18"/><circle cx="16.5" cy="14.5" r="1.2"/></svg><span>Wins</span></a></nav></div>
+
 </body>
 </html>
